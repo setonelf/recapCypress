@@ -51,7 +51,7 @@ describe('Trabalhando com elementos basicos...', ()=> {
             .should('have.value', 'acerto')
     })
 
-    it.only('Radio Button', ()=>{
+    it('Radio Button', ()=>{
         cy.get('#formSexoFem')
             .click()
             .should('be.checked')
@@ -61,5 +61,17 @@ describe('Trabalhando com elementos basicos...', ()=> {
         
         cy.get('[name="formSexo"]')
            .should('have.length', 2)
+    })
+
+    it.only('Check Box', ()=>{
+        cy.get('#formComidaPizza')
+            .click()
+            .should('be.checked')
+        cy.get('[name=formComidaFavorita]')
+            .click({ multiple: true })
+        cy.get('#formComidaPizza')
+            .should('not.be.checked')
+        cy.get('#formComidaVegetariana')
+            .should('be.checked')
     })
 })
