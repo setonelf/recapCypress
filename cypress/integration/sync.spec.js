@@ -25,4 +25,14 @@ describe('Esperas', ()=>{
             .type('funciona')
             //.should('not.exist')
     })
+
+    it.only('Deve fazer uso do find', ()=>{
+        cy.get('#buttonList').click()
+        cy.get('#lista')
+            .find('span')
+            .should('contain', 'Item 1')
+        cy.get('#lista')
+            .find('span')
+            .should('contain', 'Item 2')
+    })
 })
