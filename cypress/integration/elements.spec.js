@@ -75,7 +75,7 @@ describe('Trabalhando com elementos basicos...', ()=> {
             .should('be.checked')
     })
 
-    it.only('Combo box', ()=>{
+    it('Combo box', ()=>{
         cy.get('[data-test=dataEscolaridade]')
             .select('2o grau completo')
             .should('have.value', '2graucomp')
@@ -83,5 +83,14 @@ describe('Trabalhando com elementos basicos...', ()=> {
         cy.get('[data-test=dataEscolaridade]')
             .select('1graucomp')
             .should('have.value', '1graucomp')
+
+        //TODO validar as opcoes do combo
+    })
+
+    it.only('Combo multiplo', ()=>{
+        cy.get('[data-testid=dataEsportes]')
+            .select(['natacao', 'Corrida'])
+
+        //TODO validar opções selecionadas do combo múltiplo
     })
 })
