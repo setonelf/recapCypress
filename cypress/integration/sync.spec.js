@@ -18,7 +18,7 @@ describe('Esperas', ()=>{
         cy.get('#novoCampo').type('funciona')
     })
 
-    it.only('Deve fazer retentativas', ()=>{
+    it('Deve fazer retentativas', ()=>{
         cy.get('#buttonDelay').click()
         cy.get('#novoCampo')
             .should('exist')
@@ -26,13 +26,19 @@ describe('Esperas', ()=>{
             //.should('not.exist')
     })
 
-    it.only('Deve fazer uso do find', ()=>{
+    it('Deve fazer uso do find', ()=>{
         cy.get('#buttonList').click()
         cy.get('#lista')
             .find('span')
             .should('contain', 'Item 1')
         cy.get('#lista')
             .find('span')
+            .should('contain', 'Item 2')
+    })
+
+    it.only('Uso do timeout', ()=>{
+        cy.get('#buttonListDOM').click()
+        cy.get('#lista li span', {timeout:30000})
             .should('contain', 'Item 2')
     })
 })
