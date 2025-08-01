@@ -42,10 +42,39 @@ describe('Esperas', ()=>{
             .should('contain', 'Item 2')
     })
 
-    it.only('Uso do Retry', ()=>{
+    it('Uso do Retry', ()=>{
         cy.get('#buttonCount')
             .click()
             .click()
             .should('have.value', '111')
+    })
+
+    it.only('Should vs Then', ()=>{
+        //O should ignora o que esta dentro do return
+        cy.get('#buttonListDOM').should($el =>{
+            //console.log($el)
+            expect($el).to.have.length(1)
+            return 2
+        }).and('have.id', 'buttonListDOM')
+
+        //Ja o then ele leva em consideração o que está dentro do retorno e neste caso gera um erro
+        cy.get('#buttonListDOM').then($el =>{
+            //console.log($el)
+            expect($el).to.have.length(1)
+            return 2
+        }).and('eq', 2)
+
+         cy.get('#buttonListDOM').click()
+         
+        //O should faz a verificação enquanto faz a busca
+        cy.get('#lista li span').should($el =>{
+            //console.log($el)
+            expect($el).to.have.length(1)
+        })
+        // //O then aguarda a busca para poder realizar a verificação
+        cy.get('#lista li span').then($el =>{
+            //console.log($el)
+            expect($el).to.have.length(1)
+        })
     })
 })
